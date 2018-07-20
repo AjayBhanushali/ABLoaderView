@@ -23,7 +23,7 @@
 ## Installation
 
 #### CocoaPods
-You can use [CocoaPods](https://cocoapods.org/pods/ABLoaderView) to install `ABGaugeViewKit` by adding it to your `Podfile`:
+You can use [CocoaPods](https://cocoapods.org/pods/ABLoaderView) to install `ABLoaderView` by adding it to your `Podfile`:
 
 ```ruby
 platform :ios, '11.0'
@@ -45,7 +45,7 @@ ABLoader().stopShining(myImageView)
 ABLoader().startSmartShining(viewObject)
 
 // To remove shining effect just use the follwing line.
-ABLoader().stopSmartShining(cell.childView)
+ABLoader().stopSmartShining(viewObject)
 ```
 
 ## Contribute
