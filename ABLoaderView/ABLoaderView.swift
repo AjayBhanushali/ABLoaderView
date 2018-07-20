@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class ABLoader {
-    
+    public init() {}
     public func startShining(_ view: UIView) {
         view.layoutIfNeeded()
         animate(view: view, start: true)
