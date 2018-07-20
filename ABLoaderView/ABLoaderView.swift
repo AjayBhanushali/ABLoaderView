@@ -9,22 +9,22 @@
 import Foundation
 import UIKit
 
-class ABLoaderView {
+class ABLoader {
     
-    func startShining(_ view: UIView) {
+    public func startShining(_ view: UIView) {
         view.layoutIfNeeded()
         animate(view: view, start: true)
     }
     
-    func stopShining(_ view: UIView) {
+    public func stopShining(_ view: UIView) {
         animate(view: view, start: false)
     }
     
-    func startSmartShining(_ view: UIView) {
+    public func startSmartShining(_ view: UIView) {
         addLoader(view, start: true)
     }
     
-    func stopSmartShining(_ view: UIView) {
+    public func stopSmartShining(_ view: UIView) {
         addLoader(view, start: false)
     }
     
