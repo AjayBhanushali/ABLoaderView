@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ABLoader {
+public class ABLoader {
     
     public func startShining(_ view: UIView) {
         view.layoutIfNeeded()
