@@ -10,7 +10,38 @@ import Foundation
 import UIKit
 
 public class ABLoader {
-    public init() {}
+    
+    var backgroundColor: UIColor
+    var gradientColor: UIColor
+    
+    public init() {
+        if #available(iOS 13.0, *) {
+            self.backgroundColor =  UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                switch traitCollection.userInterfaceStyle {
+                case .dark:  return UIColor(white: 0.18, alpha: 1)
+                case .light: return UIColor(white: 0.82, alpha: 1)
+                default:     return UIColor(white: 0.82, alpha: 1)
+                }
+            }
+            
+            gradientColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                switch traitCollection.userInterfaceStyle {
+                case .dark:  return UIColor(white: 0.14, alpha: 1)
+                case .light: return UIColor(white: 0.86, alpha: 1)
+                default:     return UIColor(white: 0.86, alpha: 1)
+                }
+            }
+        } else {
+            self.backgroundColor = UIColor(white: 0.82, alpha: 1)
+            self.gradientColor = UIColor(white: 0.86, alpha: 1)
+        }
+    }
+    
+    public init(background: UIColor, gradient: UIColor) {
+        self.backgroundColor = background
+        self.gradientColor = gradient
+    }
+    
     public func startShining(_ view: UIView) {
         view.layoutIfNeeded()
         animate(view: view, start: true)
@@ -39,7 +70,7 @@ public class ABLoader {
         if start {
             // 1. Add Color Layer
             let colorLayer = CALayer()
-            colorLayer.backgroundColor = UIColor.backgroundColor.cgColor
+            colorLayer.backgroundColor = backgroundColor.cgColor
             colorLayer.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
             colorLayer.name = "colorLayer"
             view.layer.addSublayer(colorLayer)
@@ -48,9 +79,9 @@ public class ABLoader {
             
             // 2. Add loader Layer
             let gradientLayer = CAGradientLayer()
-            gradientLayer.colors = [UIColor.backgroundColor.cgColor,
-                                    UIColor.gradientColor.cgColor,
-                                    UIColor.backgroundColor.cgColor]
+            gradientLayer.colors = [backgroundColor.cgColor,
+                                    gradientColor.cgColor,
+                                    backgroundColor.cgColor]
             gradientLayer.locations = [0,0.4,0.8, 1]
             gradientLayer.name = "loaderLayer"
             gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
@@ -69,36 +100,6 @@ public class ABLoader {
             if let smartLayers = view.layer.sublayers?.filter({$0.name == "colorLayer" || $0.name == "loaderLayer"}) {
                 smartLayers.forEach({$0.removeFromSuperlayer()})
             }
-        }
-    }
-}
-
-extension UIColor {
-    static var backgroundColor: UIColor {
-        if #available(iOS 13.0, *) {
-            return UIColor { (traitCollection: UITraitCollection) -> UIColor in
-                switch traitCollection.userInterfaceStyle {
-                case .dark:  return UIColor(white: 0.18, alpha: 1)
-                case .light: return UIColor(white: 0.82, alpha: 1)
-                default:     return UIColor(white: 0.82, alpha: 1)
-                }
-            }
-        } else {
-            return UIColor(white: 0.82, alpha: 1)
-        }
-    }
-    
-    static var gradientColor: UIColor {
-        if #available(iOS 13.0, *) {
-            return UIColor { (traitCollection: UITraitCollection) -> UIColor in
-                switch traitCollection.userInterfaceStyle {
-                case .dark:  return UIColor(white: 0.14, alpha: 1)
-                case .light: return UIColor(white: 0.86, alpha: 1)
-                default:     return UIColor(white: 0.86, alpha: 1)
-                }
-            }
-        } else {
-            return UIColor(white: 0.86, alpha: 1)
         }
     }
 }
