@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
           #1.
           s.name               = "ABLoaderView"
           #2.
-          s.version            = "1.0.1"
+          s.version            = "1.0.2"
           #3.  
           s.summary         = "ABLoaderView is an amazing framework to add gradient loaders your views."
           #4.
